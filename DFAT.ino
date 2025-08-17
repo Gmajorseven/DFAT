@@ -16,7 +16,6 @@ RTCDateTime dt;
 
 bool lightStatus = false;
 int onHour, onMinute, offHour, offMinute, index = 0;
-String bg = "";
 
 bool iseditMode() {
   return index > 0;
