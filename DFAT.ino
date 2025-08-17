@@ -27,6 +27,9 @@ void displayCursor() {
     int dateColumn = 38 + ((index - 1) % 3) * 19;
     int size = index < 4 ? 2 : 1;
     int col = index < 4 ? timeColumn : dateColumn;
+    if (index == 6) {
+        col = col + 19;
+    }
     int row = index < 4 ? 10 : 28;
     display.setTextSize(size);
     display.setCursor(col, row);
