@@ -14,7 +14,7 @@ Adafruit_SH1106 display(OLED_RESET);
 DS3231 clock;
 RTCDateTime dt;
 
-bool lightStatus = false;
+bool deviceStatus = false;
 int onHour, onMinute, offHour, offMinute, index = 0;
 
 bool iseditMode() {
@@ -177,8 +177,8 @@ void setup()
 void loop()
 {
   updateTime();
-  toggleDevice(autoTiming(lightStatus, dt.month, dt.hour, dt.minute));
-  displayMain(dt.day, dt.month, dt.year, dt.hour, dt.minute, dt.second, autoTiming(lightStatus, dt.month, dt.hour, dt.minute));
+  toggleDevice(autoTiming(deviceStatus, dt.month, dt.hour, dt.minute));
+  displayMain(dt.day, dt.month, dt.year, dt.hour, dt.minute, dt.second, autoTiming(deviceStatus, dt.month, dt.hour, dt.minute));
   displayCursor();
   checkEditMode();
   checkincMode();
