@@ -130,7 +130,7 @@ void displayMain(int day, int month, int year, int hour, int minute, int second,
   char buf2[11];  // Enough for "DD/MM/YYYY" + null
   char buf3[13];  // For light status
   sprintf(buf, "%2d:%02d:%02d", hour, minute, second);
-  sprintf(buf2, "%02d-%02d-%02d", day, month, year);
+  sprintf(buf2, "%02d-%02d-%04d", day, month, year);
   sprintf(buf3, "Device:%s", status ? "ON" : "OFF");
 
   display.clearDisplay();
