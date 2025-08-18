@@ -28,7 +28,7 @@ void displayCursor() {
     int size = index < 4 ? 2 : 1;
     int col = index < 4 ? timeColumn : dateColumn;
     if (index == 6) {
-        col = col + 19;
+        col = col + 10;
     }
     int row = index < 4 ? 10 : 28;
     display.setTextSize(size);
@@ -74,13 +74,14 @@ void checkEditMode() {
   if (digitalRead(setPin) == LOW) {
     index = (index + 1) % 7;
     Serial.println("Set pressed!");
+    while (digitalRead(setPin) == LOW) { };
     if (!iseditMode()) {
       clock.setDateTime(dt.year , dt.month, dt.day, dt.hour, dt.minute, dt.second);
     }
   }
 }
 
-void checkincMode() {
+void checkValue() {
   if (iseditMode() && digitalRead(incPin) == LOW) {
     Serial.println("Inc pressed!");
     incTime();
@@ -155,17 +156,17 @@ void displayMain(int day, int month, int year, int hour, int minute, int second,
   display.display();
   delay(200);
 }
-void setup()
-{
+
+void setup() {
   Serial.begin(9600);
   display.begin(SH1106_SWITCHCAPVCC, 0x3C);
 
   display.display();
-  Serial.println("Initialize Display");
+  Serial.println("Initialize Display...");
   delay(2000);
   display.clearDisplay();
 
-  Serial.println("Initialize DS3231");
+  Serial.println("Initialize DS3231...");
   clock.begin();
 
   pinMode(relayPin, OUTPUT);
@@ -177,12 +178,11 @@ void setup()
   clock.setDateTime(__DATE__, __TIME__);
 }
 
-void loop()
-{
+void loop() {
   updateTime();
   toggleDevice(autoTiming(deviceStatus, dt.month, dt.hour, dt.minute));
   displayMain(dt.day, dt.month, dt.year, dt.hour, dt.minute, dt.second, autoTiming(deviceStatus, dt.month, dt.hour, dt.minute));
   displayCursor();
   checkEditMode();
-  checkincMode();
+  checkValue();
 }
