@@ -112,14 +112,14 @@ bool autoTiming(bool status, int month, int hour, int minute) {
     if (time_inminite >= on_time_inminite && time_inminite < off_time_inminite) {
       return status = true;
     } else {
-      return status = false; // Light is off outside the on-off range
+      return status = false; // Device is off outside the on-off range
     }
   } else {
     // Handle the case where on time is after midnight
     if (time_inminite >= on_time_inminite || time_inminite < off_time_inminite) {
       return status = true;
     } else {
-      return status = false; // Light is off outside the on-off range
+      return status = false; // Device is off outside the on-off range
     }
   }
 }
@@ -131,7 +131,7 @@ void toggleDevice(bool status) {
 void displayMain(int day, int month, int year, int hour, int minute, int second, bool status) {
   char buf[10];   // "HH:MM:SS" plus null terminator
   char buf2[11];  // Enough for "DD/MM/YYYY" + null
-  char buf3[13];  // For light status
+  char buf3[13];  // For device status
   sprintf(buf, "%2d:%02d:%02d", hour, minute, second);
   sprintf(buf2, "%02d-%02d-%04d", day, month, year);
   sprintf(buf3, "Device:%s", status ? "ON" : "OFF");
