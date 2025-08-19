@@ -2,7 +2,7 @@
 
 This project is an Arduino-based functional auto timer.
 
-# Arduino RTC-Based Relay Timer with OLED Display
+## Arduino RTC-Based Relay Timer with OLED Display
 
 This project is an **Arduino-based relay controller** that uses a **DS3231 RTC module** to keep accurate time and an **OLED SH1106 display** to show real-time clock data, date, and device status.  
 
