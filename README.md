@@ -57,7 +57,7 @@ The system automatically turns a relay **ON/OFF** depending on the season and ti
 
 ## 📋 Circuit Diagram  
 
-![Arduino Relay RTC OLED Circuit](arduino_relay_rtc_diagram.png)  
+![Arduino Relay RTC OLED Circuit](diagram.png)  
 
 ---
 
