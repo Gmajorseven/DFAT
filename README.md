@@ -2,37 +2,74 @@
 
 This project is an Arduino-based functional auto timer.
 
-## Features
+# Arduino RTC-Based Relay Timer with OLED Display
 
+This project is an **Arduino-based relay controller** that uses a **DS3231 RTC module** to keep accurate time and an **OLED SH1106 display** to show real-time clock data, date, and device status.  
 
-## Hardware
+The system automatically turns a relay **ON/OFF** depending on the season and time schedule, while also allowing **manual time/date editing** using push buttons.  
 
-*   Arduino Uno (or compatible board)
+---
 
-## Software
+## ✨ Features  
 
-This project requires the following Arduino libraries:
+- ⏰ **Real-Time Clock (RTC)**  
+- 📺 **OLED Display (SH1106)**  
+- ⚡ **Relay Control** with seasonal schedules  
+- 🎛 **Button Controls** for editing date & time  
 
+---
 
-## Building and Uploading
+## 🛠 Hardware Requirements  
 
-This project uses a Makefile for easy building and uploading.
+- **Arduino Board** (Uno, Nano, Mega, etc.)  
+- **DS3231 RTC Module**  
+- **OLED Display (SH1106, I2C, 128x64)**  
+- **Relay Module**  
+- **Push Buttons (3x)** (Set, Increment, Decrement)  
+- **Wires & Breadboard**  
 
-1.  **Configure the Makefile:**
-    *   Set `BOARD_TAG` to your Arduino board (e.g., `uno`, `mega`).
-    *   Set `MONITOR_PORT` to the serial port of your Arduino.
+---
 
-2.  **Build the code:**
-    ```bash
-    make
-    ```
+## 🔌 Pin Connections  
 
-3.  **Upload to the Arduino:**
-    ```bash
-    ```
+| Component | Arduino Pin |
+|-----------|-------------|
+| OLED SDA  | A4 (SDA)    |
+| OLED SCL  | A5 (SCL)    |
+| Relay     | D13         |
+| Set Btn   | D12         |
+| Inc Btn   | D11         |
+| Dec Btn   | D10         |
+| RTC SDA   | A4 (SDA)    |
+| RTC SCL   | A5 (SCL)    |
 
-4.  **Open the serial monitor:**
-    ```bash
-    ```
-## Configuration
+---
 
+## 📦 Libraries Used  
+
+- `Adafruit SH1106`  
+- `Adafruit GFX`  
+- `DS3231`  
+- `Wire` (built-in)  
+- `SPI` (built-in)  
+
+---
+
+## 📋 Circuit Diagram  
+
+![Arduino Relay RTC OLED Circuit](arduino_relay_rtc_diagram.png)  
+
+---
+
+## ▶️ How It Works  
+
+1. At startup, RTC initializes with Arduino compile time.  
+2. Relay **ON/OFF** schedule depends on month:  
+   - **Apr–Sep:** ON 18:25, OFF 05:45  
+   - **Oct–Mar:** ON 17:30, OFF 05:50  
+3. User can adjust **time & date** with buttons.  
+4. OLED shows **time, date, and relay status**.  
+
+---
+
+## 📋 Example OLED Output
