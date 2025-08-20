@@ -73,3 +73,4 @@ The system automatically turns a relay **ON/OFF** depending on the season and ti
 ---
 
 ## 📋 Example OLED Output
+![Arduino OLED Display](output.jpeg)
