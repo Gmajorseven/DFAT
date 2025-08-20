@@ -150,7 +150,7 @@ void displayMain(int day, int month, int year, int hour, int minute, int second,
   display.setTextColor(BLACK, WHITE);
   display.setCursor(34, 45);
   for (int i = 1; i <= 9; i++) {
-    display.writeLine(255, 43+i, 0, 43+i, WHITE);
+    display.writeLine(128, 43+i, 0, 43+i, WHITE);
   }
   display.println(buf3);
   display.display();
