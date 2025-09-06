@@ -59,14 +59,14 @@ void decTime() {
     case 2: dt.minute = (dt.minute - 1) % 60; break;
     case 3: dt.second = (dt.second - 1) % 60; break;
     case 4: dt.day = (dt.day % 31) - 1; break;
-    case 5: dt.month = (dt.month - 12) + 1; break;
+    case 5: dt.month = (dt.month % 12) - 1; break;
     case 6: dt.year = dt.year - 1; break;
   }
 }
 
 void updateTime() {
   if (!iseditMode()) {
-  dt = clock.getDateTime();
+    dt = clock.getDateTime();
   }
 }
 
