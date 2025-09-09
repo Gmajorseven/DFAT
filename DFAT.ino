@@ -42,25 +42,85 @@ void displayCursor() {
   }
 }
 
+int daysInMonth(int month, int year) {
+  if (month == 2) {
+    if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+      return 29; // Leap year
+    } else {
+      return 28;
+    }
+  } else if (month == 4 || month == 6 || month == 9 || month == 11) {
+    return 30;
+  } else {
+    return 31;
+  }
+}
+
 void incTime() {
   switch (index) {
-    case 1: dt.hour = (dt.hour + 1) % 24; break;
-    case 2: dt.minute = (dt.minute + 1) % 60; break;
-    case 3: dt.second = (dt.second + 1) % 60; break;
-    case 4: dt.day = (dt.day % 31) + 1; break;
-    case 5: dt.month = (dt.month % 12) + 1; break;
-    case 6: dt.year = dt.year + 1; break;
+    case 1:
+      dt.hour = (dt.hour + 1) % 24;
+      break;
+    case 2:
+      dt.minute = (dt.minute + 1) % 60;
+      break;
+    case 3:
+      dt.second = (dt.second + 1) % 60;
+      break;
+    case 4:
+      dt.day++;
+      if (dt.day > daysInMonth(dt.month, dt.year)) {
+        dt.day = 1;
+        dt.month++;
+        if (dt.month > 12) {
+          dt.month = 1;
+          dt.year++;
+        }
+      }
+      break;
+    case 5:
+      dt.month++;
+      if (dt.month > 12) {
+        dt.month = 1;
+      }
+      break;
+    case 6:
+      dt.year++;
+      break;
   }
 }
 
 void decTime() {
   switch (index) {
-    case 1: dt.hour = (dt.hour - 1) % 24; break;
-    case 2: dt.minute = (dt.minute - 1) % 60; break;
-    case 3: dt.second = (dt.second - 1) % 60; break;
-    case 4: dt.day = (dt.day % 31) - 1; break;
-    case 5: dt.month = (dt.month % 12) - 1; break;
-    case 6: dt.year = dt.year - 1; break;
+    case 1:
+      dt.hour = (dt.hour - 1 + 24) % 24;
+      break;
+    case 2:
+      dt.minute = (dt.minute - 1 + 60) % 60;
+      break;
+    case 3:
+      dt.second = (dt.second - 1 + 60) % 60;
+      break;
+    case 4:
+      dt.day--;
+      if (dt.day < 1) {
+        dt.month--;
+        if (dt.month < 1) {
+          dt.month = 12;
+          dt.year--;
+        }
+        dt.day = daysInMonth(dt.month, dt.year);
+      }
+      break;
+    case 5:
+      dt.month--;
+      if (dt.month < 1) {
+        dt.month = 12;
+      }
+      break;
+    case 6:
+      dt.year--;
+      break;
   }
 }
 
