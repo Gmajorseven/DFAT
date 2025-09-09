@@ -1,5 +1,6 @@
 #include <SPI.h>
 #include <Wire.h>
+#include <Adafruit_GFX.h>
 #include <Adafruit_SH1106.h>
 #include <DS3231.h>
 
