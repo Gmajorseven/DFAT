@@ -234,8 +234,8 @@ void setup() {
   pinMode(incPin, INPUT);
   pinMode(decPin, INPUT);
 
-  // Set sketch compiling time
-  clock.setDateTime(__DATE__, __TIME__);
+  // Set sketch compiling time Uncomment the line below to set the RTC to the time this sketch was compiled
+  //clock.setDateTime(__DATE__, __TIME__);
 }
 
 void loop() {
