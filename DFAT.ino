@@ -152,7 +152,7 @@ void checkValue() {
   }
 }
 
-bool autoTiming(bool status, int month, int hour, int minute) {
+bool checkTimingStatus(int month, int hour, int minute) {
   if (month >= 4 && month <= 9) {
     // Summer months (April to September)
     onHour = 18; 
@@ -170,18 +170,10 @@ bool autoTiming(bool status, int month, int hour, int minute) {
   int on_time_inminite = (onHour * 60) + onMinute;
   int off_time_inminite = (offHour * 60) + offMinute;
   if (on_time_inminite < off_time_inminite) {
-    if (time_inminite >= on_time_inminite && time_inminite < off_time_inminite) {
-      return status = true;
-    } else {
-      return status = false; // Device is off outside the on-off range
-    }
+    return (time_inminite >= on_time_inminite && time_inminite < off_time_inminite)
   } else {
     // Handle the case where on time is after midnight
-    if (time_inminite >= on_time_inminite || time_inminite < off_time_inminite) {
-      return status = true;
-    } else {
-      return status = false; // Device is off outside the on-off range
-    }
+    return (time_inminite >= on_time_inminite || time_inminite < off_time_inminite)
   }
 }
 
@@ -240,8 +232,9 @@ void setup() {
 
 void loop() {
   updateTime();
-  toggleDevice(autoTiming(deviceStatus, dt.month, dt.hour, dt.minute));
-  displayMain(dt.day, dt.month, dt.year, dt.hour, dt.minute, dt.second, autoTiming(deviceStatus, dt.month, dt.hour, dt.minute));
+  bool status = checkTimingStaus(deviceStatus, dt.month, dt.hour, dt.minute));
+  toggleDevice(status);
+  displayMain(dt.day, dt.month, dt.year, dt.hour, dt.minute, dt.second, status);
   displayCursor();
   checkEditMode();
   checkValue();
