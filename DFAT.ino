@@ -1,4 +1,4 @@
-#include <SPI.h>
+8#include <SPI.h>
 #include <Wire.h>
 #include <Adafruit_SH1106.h>
 #include <DS3231.h>
@@ -234,7 +234,7 @@ void loop() {
   updateTime();
   deviceStatus = checkTimingStaus(dt.month, dt.hour, dt.minute);
   toggleDevice(deviceStatus);
-  displayMain(dt.day, dt.month, dt.year, dt.hour, dt.minute, dt.second, status);
+  displayMain(dt.day, dt.month, dt.year, dt.hour, dt.minute, dt.second, deviceStatus);
   displayCursor();
   checkEditMode();
   checkValue();
