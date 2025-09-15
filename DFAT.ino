@@ -232,7 +232,7 @@ void setup() {
 
 void loop() {
   updateTime();
-  deviceStatus = checkTimingStaus(dt.month, dt.hour, dt.minute);
+  deviceStatus = checkTimingStatus(dt.month, dt.hour, dt.minute);
   toggleDevice(deviceStatus);
   displayMain(dt.day, dt.month, dt.year, dt.hour, dt.minute, dt.second, deviceStatus);
   displayCursor();
