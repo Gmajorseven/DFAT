@@ -9,7 +9,6 @@
 #define incPin 11
 #define decPin 10
 
-
 Adafruit_SH1106 display(OLED_RESET);
 DS3231 clock;
 RTCDateTime dt;
