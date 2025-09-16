@@ -1,4 +1,4 @@
-8#include <SPI.h>
+#include <SPI.h>
 #include <Wire.h>
 #include <Adafruit_SH1106.h>
 #include <DS3231.h>
@@ -19,27 +19,6 @@ int onHour, onMinute, offHour, offMinute, index = 0;
 
 bool iseditMode() {
   return index > 0;
-}
-
-void displayCursor() {
-  if (iseditMode()) {
-    int timeColumn = 26 + ((index - 1) % 3) * 36;
-    int dateColumn = 38 + ((index - 1) % 3) * 19;
-    int size = index < 4 ? 2 : 1;
-    int col = index < 4 ? timeColumn : dateColumn;
-    if (index == 6) {
-        col = col + 10;
-    }
-    int row = index < 4 ? 10 : 28;
-    display.setTextSize(size);
-    display.setCursor(col, row);
-    display.setTextColor(BLACK, WHITE);
-    display.print("_");
-    display.display();
-    delay(200);
-  } else {
-    display.clearDisplay();
-  }
 }
 
 int daysInMonth(int month, int year) {
@@ -182,31 +161,52 @@ void toggleDevice(bool status) {
 }
 
 void displayMain(int day, int month, int year, int hour, int minute, int second, bool status) {
-  char buf[10];   // "HH:MM:SS" plus null terminator
-  char buf2[11];  // Enough for "DD/MM/YYYY" + null
-  char buf3[13];  // For device status
-  sprintf(buf, "%2d:%02d:%02d", hour, minute, second);
-  sprintf(buf2, "%02d-%02d-%04d", day, month, year);
-  sprintf(buf3, "Device:%s", status ? "ON" : "OFF");
+  char timeBuf[10];   
+  char dateBuf[11];  
+  char statusBuf[13];  
+  sprintf(timeBuf, "%2d:%02d:%02d", hour, minute, second);
+  sprintf(dateBuf, "%02d-%02d-%04d", day, month, year);
+  sprintf(statusBuf, "Device:%s", status ? "ON" : "OFF");
 
   display.clearDisplay();
   display.setTextSize(2);
   display.setTextColor(WHITE);
   display.setCursor(15, 10);
-  display.println(buf);
+  display.println(timeBuf);
   display.setTextSize(1);
   display.setTextColor(WHITE);
   display.setCursor(33, 28);
-  display.println(buf2);
+  display.println(dateBuf);
   display.setTextSize(1);
   display.setTextColor(BLACK, WHITE);
   display.setCursor(34, 45);
   for (int i = 1; i <= 9; i++) {
     display.writeLine(128, 43+i, 0, 43+i, WHITE);
   }
-  display.println(buf3);
+  display.println(statusBuf);
   display.display();
   delay(200);
+}
+
+void displayCursor() {
+  if (iseditMode()) {
+    int timeColumn = 26 + ((index - 1) % 3) * 36;
+    int dateColumn = 38 + ((index - 1) % 3) * 19;
+    int size = index < 4 ? 2 : 1;
+    int col = index < 4 ? timeColumn : dateColumn;
+    if (index == 6) {
+        col = col + 10;
+    }
+    int row = index < 4 ? 10 : 28;
+    display.setTextSize(size);
+    display.setCursor(col, row);
+    display.setTextColor(BLACK, WHITE);
+    display.print("_");
+    display.display();
+    delay(50);
+  } else {
+    display.clearDisplay();
+  }
 }
 
 void setup() {
