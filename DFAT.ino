@@ -170,10 +170,10 @@ bool checkTimingStatus(int month, int hour, int minute) {
   int on_time_inminite = (onHour * 60) + onMinute;
   int off_time_inminite = (offHour * 60) + offMinute;
   if (on_time_inminite < off_time_inminite) {
-    return (time_inminite >= on_time_inminite && time_inminite < off_time_inminite)
+    return (time_inminite >= on_time_inminite && time_inminite < off_time_inminite);
   } else {
     // Handle the case where on time is after midnight
-    return (time_inminite >= on_time_inminite || time_inminite < off_time_inminite)
+    return (time_inminite >= on_time_inminite || time_inminite < off_time_inminite);
   }
 }
 
